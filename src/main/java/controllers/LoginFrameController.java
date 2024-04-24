@@ -16,11 +16,9 @@ import views.MainFrame;
 
 public class LoginFrameController {
 	private LoginFrame loginFrame;
-	private JFrame owner;
 	
-	public LoginFrameController(LoginFrame lFrame, JFrame owner) {
+	public LoginFrameController(LoginFrame lFrame) {
 		this.loginFrame = lFrame;
-		this.owner = owner;
 		
 		loginFrame.addLoginListener(new LoginListener());
 	}
@@ -34,13 +32,13 @@ public class LoginFrameController {
 				System.out.println("Pulsado!");
 				if(connectAndCheckCredentials()) {
 					AdminFrame admFrame = new AdminFrame();
-					owner.dispose();
+					loginFrame.getOwner().dispose();
 					loginFrame.dispose();
 				}else {
 					loginFrame.getLabelError().setText("El usuario o el password no son correctos");
 				}
 			}else if(obj == loginFrame.getBtnCancelar()) {
-				owner.setEnabled(true);
+				loginFrame.getOwner().setEnabled(true);
 				loginFrame.dispose();
 			}
 		}
