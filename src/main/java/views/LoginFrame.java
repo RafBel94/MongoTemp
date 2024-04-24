@@ -3,27 +3,18 @@ package views;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import org.bson.Document;
+import controllers.LoginFrameController;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
-import util.MongoDBConnection;
-
-public class LoginDialog extends JDialog {
+public class LoginFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel labelUsuario;
@@ -36,17 +27,13 @@ public class LoginDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public LoginDialog(Frame owner) {
-		super(owner);
+	public LoginFrame(JFrame owner) {
 		setTitle("Login");
 		setResizable(false);
 		setBounds(100, 100, 346, 239);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(getParent());
-		setModalityType(ModalityType.APPLICATION_MODAL);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
-		ActListener actListenner = new ActListener();
 		
 		labelUsuario = new JLabel("Usuario:");
 		labelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,18 +60,11 @@ public class LoginDialog extends JDialog {
 		btnLogin = new JButton("Login");
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnLogin.setBounds(50, 156, 89, 23);
-		btnLogin.addActionListener(actListenner);
 		getContentPane().add(btnLogin);
 		
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnCancelar.setBounds(189, 157, 89, 23);
-		btnCancelar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
 		getContentPane().add(btnCancelar);
 		
 		labelError = new JLabel("");
@@ -94,39 +74,51 @@ public class LoginDialog extends JDialog {
 		getContentPane().add(labelError);
 		setVisible(true);
 
+		LoginFrameController loginDController = new LoginFrameController(this, owner);
 	}
 	
-	private class ActListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			Object obj = e.getSource();
-			
-			if(obj == btnLogin) {
-				if(connectAndCheckCredentials()) {
-					AdminFrame admFrame = new AdminFrame();
-					LoginDialog.this.getOwner().dispose();
-					dispose();
-				}else {
-					labelError.setText("El usuario o el password no son correctos");
-				}
-			}
-		}
-		
-		private boolean connectAndCheckCredentials(){
-			MongoDBConnection connection = MongoDBConnection.getInstance();
-			MongoCollection<Document> adminCollection = connection.getDatabase().getCollection("admin");
-			
-			String user = textUsuario.getText().strip();
-			String password = textPassword.getText().strip();
-			
-			Document search = new Document("user", user).append("password", password);
-			Document find = adminCollection.find(search).first();
-			
-			if(find != null) {
-				return true;
-			}else {
-				return false;
-			}
-		}
+	public JButton getBtnLogin() {
+		return btnLogin;
+	}
+
+	public void setBtnLogin(JButton btnLogin) {
+		this.btnLogin = btnLogin;
+	}
+
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+
+	public void setBtnCancelar(JButton btnCancelar) {
+		this.btnCancelar = btnCancelar;
+	}
+
+	public JTextField getTextUsuario() {
+		return textUsuario;
+	}
+
+	public void setTextUsuario(JTextField textUsuario) {
+		this.textUsuario = textUsuario;
+	}
+
+	public JPasswordField getTextPassword() {
+		return textPassword;
+	}
+
+	public void setTextPassword(JPasswordField textPassword) {
+		this.textPassword = textPassword;
+	}
+
+	public JLabel getLabelError() {
+		return labelError;
+	}
+
+	public void setLabelError(JLabel labelError) {
+		this.labelError = labelError;
+	}
+
+	public void addLoginListener(ActionListener listener) {
+		btnLogin.addActionListener(listener);
+		btnCancelar.addActionListener(listener);
 	}
 }

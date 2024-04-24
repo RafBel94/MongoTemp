@@ -82,7 +82,7 @@ public class MainFrame extends JFrame {
 		
 		setVisible(true);
 		
-		MainFrameController mfController = new MainFrameController(MainFrame.this);
+		MainFrameController mfController = new MainFrameController(this);
 	}
 	
 	public JButton getBtnConsulta() {

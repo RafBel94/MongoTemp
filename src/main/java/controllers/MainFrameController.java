@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import views.AboutDialog;
-import views.LoginDialog;
+import views.LoginFrame;
 import views.MainFrame;
 
 public class MainFrameController{
@@ -24,7 +24,8 @@ public class MainFrameController{
 			if(obj == mainFrame.getBtnAbout()) {
 				AboutDialog abtDialog = new AboutDialog();
 			}else if(obj == mainFrame.getBtnLogin()) {
-				LoginDialog lgnDialog = new LoginDialog(mainFrame);
+				LoginFrame lgnFrame = new LoginFrame(mainFrame);
+				mainFrame.setEnabled(false);
 			}
 		}
 	}
