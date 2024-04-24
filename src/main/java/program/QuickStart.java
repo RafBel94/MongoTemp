@@ -49,7 +49,7 @@ public class QuickStart {
 		// Obtenemos la coleccion pero en vez de con "Document", esta vez lo hacemos con "Grade" para el mapeo a POJO
 		MongoCollection<Temperature> collectionTemperature = database.getCollection("temperatures", Temperature.class);
 		
-		// --> Descomentar las siguientes lineas si es necesario.
+		// --> Descomentar las siguientes lineas si es necesario
 		//insertOneTemperature(collection);
 		//insertManyTemperatures(collection);
 		
