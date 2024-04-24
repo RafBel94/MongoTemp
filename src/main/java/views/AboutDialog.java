@@ -1,4 +1,4 @@
-package program;
+package views;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -14,6 +14,7 @@ public class AboutDialog extends JDialog {
 	 */
 	public AboutDialog() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setResizable(false);
 		setTitle("Sobre el equipo");
 		setBounds(100, 100, 450, 421);
 		setLocationRelativeTo(getParent());

@@ -1,4 +1,4 @@
-package program;
+package dummy;
 
 
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
-import model.Temperature;
+import models.Temperature;
 
-public class QuickStart {
+public class MongoGuide {
 	public static void main(String[] args) {
 		CodecRegistry pojoCodecRegistry = CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build());
 		CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),pojoCodecRegistry);

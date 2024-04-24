@@ -1,6 +1,9 @@
-package program;
+package views;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -10,10 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
+
+import controllers.MainFrameController;
 
 public class MainFrame extends JFrame {
 
@@ -31,6 +33,7 @@ public class MainFrame extends JFrame {
 	 */
 	public MainFrame() {
 		setTitle("MongoTemp");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 300, 343);
 		setLocationRelativeTo(null);
@@ -42,7 +45,7 @@ public class MainFrame extends JFrame {
 		
 		panelLogin = new JPanel();
 		panelLogin.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelLogin.setBounds(60, 227, 166, 64);
+		panelLogin.setBounds(48, 227, 190, 64);
 		contentPane.add(panelLogin);
 		panelLogin.setLayout(null);
 		
@@ -52,15 +55,12 @@ public class MainFrame extends JFrame {
 		labelLogo.setBounds(17, 5, 250, 87);
 		contentPane.add(labelLogo);
 		
-		ActListener actListener = new ActListener();
-		
 		btnConsulta = new JButton("Realizar Consulta");
 		btnConsulta.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnConsulta.setBounds(37, 126, 213, 72);
 		contentPane.add(btnConsulta);
 		
 		btnAbout = new JButton("?");
-		btnAbout.addActionListener(actListener);
 		btnAbout.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnAbout.setBounds(249, 268, 25, 23);
 		contentPane.add(btnAbout);
@@ -70,27 +70,48 @@ public class MainFrame extends JFrame {
 		contentPane.add(separator);
 		
 		lblNewLabel = new JLabel("¿Eres administrador?");
-		lblNewLabel.setBounds(21, 6, 120, 16);
+		lblNewLabel.setBounds(10, 6, 170, 16);
 		panelLogin.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		btnLogin = new JButton("Login");
-		btnLogin.addActionListener(actListener);
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnLogin.setBounds(37, 33, 89, 23);
+		btnLogin.setBounds(51, 33, 89, 23);
 		panelLogin.add(btnLogin);
 		
+		setVisible(true);
+		
+		MainFrameController mfController = new MainFrameController(MainFrame.this);
 	}
-	private class ActListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			Object obj = e.getSource();
-			
-			if(obj == btnAbout) {
-				AboutDialog abtDialog = new AboutDialog();
-			}else if(obj == btnLogin) {
-				LoginDialog lgnDialog = new LoginDialog(MainFrame.this);
-			}
-		}
+	
+	public JButton getBtnConsulta() {
+		return btnConsulta;
+	}
+
+	public void setBtnConsulta(JButton btnConsulta) {
+		this.btnConsulta = btnConsulta;
+	}
+
+	public JButton getBtnAbout() {
+		return btnAbout;
+	}
+
+	public void setBtnAbout(JButton btnAbout) {
+		this.btnAbout = btnAbout;
+	}
+
+	public JButton getBtnLogin() {
+		return btnLogin;
+	}
+
+	public void setBtnLogin(JButton btnLogin) {
+		this.btnLogin = btnLogin;
+	}
+
+	public void addLoginListener(ActionListener listener) {
+		btnLogin.addActionListener(listener);
+		btnAbout.addActionListener(listener);
+		btnConsulta.addActionListener(listener);
 	}
 }

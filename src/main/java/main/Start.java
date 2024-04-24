@@ -1,6 +1,8 @@
-package program;
+package main;
 
 import java.awt.EventQueue;
+
+import views.InitFrame;
 
 public class Start {
 
@@ -8,7 +10,7 @@ public class Start {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame frame = new MainFrame();
+					InitFrame frame = new InitFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -1,4 +1,4 @@
-package program;
+package views;
 
 import java.awt.Font;
 
@@ -24,6 +24,7 @@ public class AdminFrame extends JFrame {
 	 */
 	public AdminFrame() {
 		setTitle("Panel de administrador");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);

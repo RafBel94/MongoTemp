@@ -1,4 +1,4 @@
-package program;
+package views;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -21,6 +21,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import util.MongoDBConnection;
+
 public class LoginDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -37,6 +39,7 @@ public class LoginDialog extends JDialog {
 	public LoginDialog(Frame owner) {
 		super(owner);
 		setTitle("Login");
+		setResizable(false);
 		setBounds(100, 100, 346, 239);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(getParent());
@@ -104,23 +107,20 @@ public class LoginDialog extends JDialog {
 					LoginDialog.this.getOwner().dispose();
 					dispose();
 				}else {
-					labelError.setText("El usuario o el password\n no son correctos");
+					labelError.setText("El usuario o el password no son correctos");
 				}
 			}
-			
 		}
 		
 		private boolean connectAndCheckCredentials(){
-			ConnectionString connectionString = new ConnectionString("mongodb+srv://beltrancaraf23:Pitubibi94.@proyectobbdd.apuoxqd.mongodb.net/?retryWrites=true&w=majority&appName=ProyectoBBDD");
-			MongoClient mongoClient = MongoClients.create(connectionString);
-			MongoDatabase mongoDatabase = mongoClient.getDatabase("ProyectoTemperaturas");
-			MongoCollection<Document> adminCollection = mongoDatabase.getCollection("admin");
+			MongoDBConnection connection = MongoDBConnection.getInstance();
+			MongoCollection<Document> adminCollection = connection.getDatabase().getCollection("admin");
 			
 			String user = textUsuario.getText().strip();
 			String password = textPassword.getText().strip();
+			
 			Document search = new Document("user", user).append("password", password);
 			Document find = adminCollection.find(search).first();
-			mongoClient.close();
 			
 			if(find != null) {
 				return true;
