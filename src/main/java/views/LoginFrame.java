@@ -2,7 +2,6 @@ package views;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -33,7 +32,7 @@ public class LoginFrame extends JFrame {
 		setBounds(100, 100, 346, 239);
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(getParent());
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		labelUsuario = new JLabel("Usuario:");
 		labelUsuario.setHorizontalAlignment(SwingConstants.CENTER);
