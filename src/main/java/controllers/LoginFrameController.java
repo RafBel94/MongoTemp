@@ -3,8 +3,6 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-
 import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
@@ -28,8 +26,7 @@ public class LoginFrameController {
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
 			
-			if(obj == loginFrame.getBtnLogin()) {
-				System.out.println("Pulsado!");
+			if(obj == loginFrame.getBtnLogin() || obj == loginFrame.getTextUsuario() || obj == loginFrame.getTextPassword()) {
 				if(connectAndCheckCredentials()) {
 					loginFrame.dispose();
 					AdminFrame admFrame = new AdminFrame();

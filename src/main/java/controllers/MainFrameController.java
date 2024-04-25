@@ -3,7 +3,7 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import views.AboutDialog;
+import views.AboutFrame;
 import views.LoginFrame;
 import views.MainFrame;
 
@@ -22,7 +22,7 @@ public class MainFrameController{
 			Object obj = e.getSource();
 			
 			if(obj == mainFrame.getBtnAbout()) {
-				AboutDialog abtDialog = new AboutDialog();
+				AboutFrame abtFrame = new AboutFrame();
 			}else if(obj == mainFrame.getBtnLogin()) {
 				LoginFrame lgnFrame = new LoginFrame();
 				mainFrame.dispose();

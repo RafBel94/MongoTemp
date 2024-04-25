@@ -3,3 +3,6 @@
 /LoginFrameController.class
 /MainFrameController$LoginListener.class
 /MainFrameController.class
+/AdminFrameController.class
+/AdminFrameController$ActionListener.class
+/AdminFrameController$ActListener.class

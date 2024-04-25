@@ -5,14 +5,14 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class AboutDialog extends JDialog {
+public class AboutFrame extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel labelLogo;
 	/**
 	 * Create the dialog.
 	 */
-	public AboutDialog() {
+	public AboutFrame() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setTitle("Sobre el equipo");
@@ -26,7 +26,7 @@ public class AboutDialog extends JDialog {
 		labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLogo.setBounds(62, 11, 310, 312);
 		getContentPane().add(labelLogo);
+		
 		setVisible(true);
 	}
-
 }

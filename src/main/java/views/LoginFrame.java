@@ -120,5 +120,7 @@ public class LoginFrame extends JFrame {
 	public void addLoginListener(ActionListener listener) {
 		btnLogin.addActionListener(listener);
 		btnCancelar.addActionListener(listener);
+		textUsuario.addActionListener(listener);
+		textPassword.addActionListener(listener);
 	}
 }
