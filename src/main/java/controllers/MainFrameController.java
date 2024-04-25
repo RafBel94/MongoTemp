@@ -24,8 +24,8 @@ public class MainFrameController{
 			if(obj == mainFrame.getBtnAbout()) {
 				AboutDialog abtDialog = new AboutDialog();
 			}else if(obj == mainFrame.getBtnLogin()) {
-				LoginFrame lgnFrame = new LoginFrame(mainFrame);
-				mainFrame.setEnabled(false);
+				LoginFrame lgnFrame = new LoginFrame();
+				mainFrame.dispose();
 			}
 		}
 	}

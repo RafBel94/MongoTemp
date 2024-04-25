@@ -17,7 +17,6 @@ import controllers.LoginFrameController;
 public class LoginFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JFrame owner;
 	private JLabel labelUsuario;
 	private JTextField textUsuario;
 	private JLabel labelPassword;
@@ -28,8 +27,7 @@ public class LoginFrame extends JFrame {
 	/**
 	 * Create the dialog.
 	 */
-	public LoginFrame(JFrame owner) {
-		this.owner = owner;
+	public LoginFrame() {
 		setTitle("Login");
 		setResizable(false);
 		setBounds(100, 100, 346, 239);
@@ -77,14 +75,6 @@ public class LoginFrame extends JFrame {
 		setVisible(true);
 
 		LoginFrameController loginDController = new LoginFrameController(this);
-	}
-	
-	public JFrame getOwner() {
-		return owner;
-	}
-
-	public void setOwner(JFrame owner) {
-		this.owner = owner;
 	}
 
 	public JButton getBtnLogin() {

@@ -31,15 +31,14 @@ public class LoginFrameController {
 			if(obj == loginFrame.getBtnLogin()) {
 				System.out.println("Pulsado!");
 				if(connectAndCheckCredentials()) {
-					AdminFrame admFrame = new AdminFrame();
-					loginFrame.getOwner().dispose();
 					loginFrame.dispose();
+					AdminFrame admFrame = new AdminFrame();
 				}else {
 					loginFrame.getLabelError().setText("El usuario o el password no son correctos");
 				}
 			}else if(obj == loginFrame.getBtnCancelar()) {
-				loginFrame.getOwner().setEnabled(true);
 				loginFrame.dispose();
+				new MainFrame();
 			}
 		}
 		private boolean connectAndCheckCredentials() {
