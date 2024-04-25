@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import views.AboutFrame;
 import views.LoginFrame;
 import views.MainFrame;
+import views.MapFrame;
 
 public class MainFrameController{
 	private MainFrame mainFrame;
@@ -22,10 +23,12 @@ public class MainFrameController{
 			Object obj = e.getSource();
 			
 			if(obj == mainFrame.getBtnAbout()) {
-				AboutFrame abtFrame = new AboutFrame();
+				new AboutFrame();
 			}else if(obj == mainFrame.getBtnLogin()) {
-				LoginFrame lgnFrame = new LoginFrame();
+				new LoginFrame();
 				mainFrame.dispose();
+			}else if(obj == mainFrame.getBtnConsulta()) {
+				new MapFrame();
 			}
 		}
 	}
