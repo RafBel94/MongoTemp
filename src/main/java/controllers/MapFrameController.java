@@ -14,7 +14,7 @@ import views.MapFrame;
 import views.QueryFrame;
 
 public class MapFrameController {
-	private List<JCheckBox> cbxList = new ArrayList<>();
+	private static List<JCheckBox> cbxList = new ArrayList<>();
 	private MapFrame mapFrame;
 	
 	public MapFrameController(MapFrame mapFrame) {
@@ -34,7 +34,11 @@ public class MapFrameController {
 				new MainFrame();
 			}else if(obj == mapFrame.getBtnContinuar()) {
 				mapFrame.dispose();
-				new QueryFrame(cbxList);
+				new QueryFrame();
+			}else if(obj == mapFrame.getBtnTodo()) {
+				selectAll();
+			}else if(obj == mapFrame.getBtnNada()) {
+				deselectAll();
 			}
 		}
 	}
@@ -47,6 +51,22 @@ public class MapFrameController {
 				cbxList.add(cbx);
 			else
 				cbxList.remove(cbx);
+		}
+	}
+	
+	public static List<JCheckBox> getJCheckBoxList (){
+		return cbxList;
+	}
+	
+	private void selectAll() {
+		for(JCheckBox cbx : mapFrame.getAllJCheckBox()) {
+			cbx.setSelected(true);
+		}
+	}
+	
+	private void deselectAll() {
+		for(JCheckBox cbx : mapFrame.getAllJCheckBox()) {
+			cbx.setSelected(false);
 		}
 	}
 }

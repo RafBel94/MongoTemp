@@ -34,6 +34,8 @@ public class MapFrame extends JFrame {
 	private JCheckBox cbGranada;
 	private JCheckBox cbMalaga;
 	private JCheckBox cbAlmeria;
+	private JButton btnTodo;
+	private JButton btnNada;
 	
 	public MapFrame() {
 		setTitle("Seleccion de provincia");
@@ -41,6 +43,18 @@ public class MapFrame extends JFrame {
 		setBounds(100, 100, 609, 517);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
+		
+		btnNada = new JButton("");
+		btnNada.setToolTipText("Deseleccionar todo");
+		btnNada.setIcon(new ImageIcon("image/DeselectAll.png"));
+		btnNada.setBounds(548, 44, 26, 25);
+		getContentPane().add(btnNada);
+		
+		btnTodo = new JButton("");
+		btnTodo.setToolTipText("Seleccionar todo");
+		btnTodo.setIcon(new ImageIcon("image/SelectAll.png"));
+		btnTodo.setBounds(514, 44, 26, 25);
+		getContentPane().add(btnTodo);
 		
 		cbAlmeria = new JCheckBox("");
 		cbAlmeria.setToolTipText("Almeria");
@@ -128,6 +142,8 @@ public class MapFrame extends JFrame {
 	public void addActListener(ActionListener actionListener) {
 		btnContinuar.addActionListener(actionListener);
 		btnVolver.addActionListener(actionListener);
+		btnTodo.addActionListener(actionListener);
+		btnNada.addActionListener(actionListener);
 	}
 	
 	public void addItmListener(ItemListener itmListener) {
@@ -139,6 +155,20 @@ public class MapFrame extends JFrame {
 		cbSevilla.addItemListener(itmListener);
 		cbCadiz.addItemListener(itmListener);
 		cbMalaga.addItemListener(itmListener);
+	}
+	
+	public List<JCheckBox> getAllJCheckBox(){
+		List<JCheckBox> list = new ArrayList<>();
+		list.add(cbAlmeria);
+		list.add(cbCordoba);
+		list.add(cbHuelva);
+		list.add(cbJaen);
+		list.add(cbGranada);
+		list.add(cbSevilla);
+		list.add(cbCadiz);
+		list.add(cbMalaga);
+		
+		return list;
 	}
 
 	public JButton getBtnVolver() {
@@ -155,6 +185,22 @@ public class MapFrame extends JFrame {
 
 	public void setBtnContinuar(JButton btnContinuar) {
 		this.btnContinuar = btnContinuar;
+	}
+
+	public JButton getBtnTodo() {
+		return btnTodo;
+	}
+
+	public void setBtnTodo(JButton btnTodo) {
+		this.btnTodo = btnTodo;
+	}
+
+	public JButton getBtnNada() {
+		return btnNada;
+	}
+
+	public void setBtnNada(JButton btnNada) {
+		this.btnNada = btnNada;
 	}
 
 	public JCheckBox getCbSevilla() {
