@@ -4,13 +4,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JOptionPane;
+import javax.swing.JCheckBox;
 
 import views.MainFrame;
 import views.MapFrame;
+import views.QueryFrame;
 
 public class MapFrameController {
+	private List<JCheckBox> cbxList = new ArrayList<>();
 	private MapFrame mapFrame;
 	
 	public MapFrameController(MapFrame mapFrame) {
@@ -29,7 +33,8 @@ public class MapFrameController {
 				mapFrame.dispose();
 				new MainFrame();
 			}else if(obj == mapFrame.getBtnContinuar()) {
-				JOptionPane.showMessageDialog(mapFrame, "Todavia por implementar =^P");
+				mapFrame.dispose();
+				new QueryFrame(cbxList);
 			}
 		}
 	}
@@ -37,6 +42,11 @@ public class MapFrameController {
 	private class ItmListener implements ItemListener {
 		@Override
 		public void itemStateChanged(ItemEvent e) {
+			JCheckBox cbx = (JCheckBox) e.getSource();
+			if(!cbxList.contains(cbx))
+				cbxList.add(cbx);
+			else
+				cbxList.remove(cbx);
 		}
 	}
 }

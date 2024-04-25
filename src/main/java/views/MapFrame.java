@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,9 +34,7 @@ public class MapFrame extends JFrame {
 	private JCheckBox cbGranada;
 	private JCheckBox cbMalaga;
 	private JCheckBox cbAlmeria;
-	/**
-	 * Create the frame.
-	 */
+	
 	public MapFrame() {
 		setTitle("Seleccion de provincia");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -43,41 +43,49 @@ public class MapFrame extends JFrame {
 		getContentPane().setLayout(null);
 		
 		cbAlmeria = new JCheckBox("");
+		cbAlmeria.setToolTipText("Almeria");
 		cbAlmeria.setBackground(new Color(233, 221, 175));
 		cbAlmeria.setBounds(502, 268, 21, 23);
 		getContentPane().add(cbAlmeria);
 		
 		cbMalaga = new JCheckBox("");
+		cbMalaga.setToolTipText("Malaga");
 		cbMalaga.setBackground(new Color(200, 183, 196));
 		cbMalaga.setBounds(267, 295, 21, 23);
 		getContentPane().add(cbMalaga);
 		
 		cbGranada = new JCheckBox("");
+		cbGranada.setToolTipText("Granada");
 		cbGranada.setBackground(new Color(233, 175, 175));
 		cbGranada.setBounds(387, 260, 21, 23);
 		getContentPane().add(cbGranada);
 		
 		cbJaen = new JCheckBox("");
+		cbJaen.setToolTipText("Jaen");
 		cbJaen.setBackground(new Color(233, 198, 175));
 		cbJaen.setBounds(393, 162, 21, 23);
 		getContentPane().add(cbJaen);
 		
 		cbCordoba = new JCheckBox("");
+		cbCordoba.setToolTipText("Cordoba");
 		cbCordoba.setBackground(new Color(175, 198, 233));
 		cbCordoba.setBounds(269, 155, 21, 23);
 		getContentPane().add(cbCordoba);
 		
 		cbCadiz = new JCheckBox("");
+		cbCadiz.setToolTipText("Cadiz");
 		cbCadiz.setBackground(new Color(175, 175, 233));
 		cbCadiz.setBounds(156, 326, 21, 23);
 		getContentPane().add(cbCadiz);
 		
 		cbSevilla = new JCheckBox("");
+		cbSevilla.setToolTipText("Sevilla");
 		cbSevilla.setBackground(new Color(183, 196, 200));
 		getContentPane().add(cbSevilla);
 		cbSevilla.setBounds(167, 218, 21, 23);
 		
 		cbHuelva = new JCheckBox("");
+		cbHuelva.setToolTipText("Huelva");
 		cbHuelva.setBackground(new Color(175, 221, 233));
 		cbHuelva.setBounds(63, 208, 21, 23);
 		getContentPane().add(cbHuelva);
