@@ -181,24 +181,4 @@ public class MongoGuide {
 		// Insertamos los documentos en la coleccion
 		col.insertMany(listaInsertar);
 	}
-
-	/*
-	private static MongoCollection<Document> connectToDatabaseAndGetCollection() {
-		// Atlas Connection String -->
-		// mongodb+srv://beltrancaraf23:<password>@proyectobbdd.apuoxqd.mongodb.net/?retryWrites=true&w=majority&appName=ProyectoBBDD
-		String uri = "mongodb+srv://beltrancaraf23:Pitubibi94.@proyectobbdd.apuoxqd.mongodb.net/?retryWrites=true&w=majority&appName=ProyectoBBDD";
-		
-		// Creamos la conexion y le pasamos la uri
-		MongoClient mongoClient = MongoClients.create(uri);
-
-		// Obtenemos la base de datos que queramos
-		MongoDatabase database = mongoClient.getDatabase("ProyectoTemperaturas");
-
-		// Obtenemos la coleccion que queramos
-		MongoCollection<Document> collection = database.getCollection("temperatures");
-		
-		return collection;
-	}
-	*/
-
 }

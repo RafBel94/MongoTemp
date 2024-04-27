@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 
 import views.MainFrame;
 import views.MapFrame;
@@ -33,8 +34,12 @@ public class MapFrameController {
 				mapFrame.dispose();
 				new MainFrame();
 			}else if(obj == mapFrame.getBtnContinuar()) {
-				mapFrame.dispose();
-				new QueryFrame();
+				if(cbxList.isEmpty())
+					JOptionPane.showMessageDialog(mapFrame, "No se ha seleccionado ninguna provincia", "Error",JOptionPane.ERROR_MESSAGE);
+				else {
+					mapFrame.dispose();
+					new QueryFrame();
+				}
 			}else if(obj == mapFrame.getBtnTodo()) {
 				selectAll();
 			}else if(obj == mapFrame.getBtnNada()) {
