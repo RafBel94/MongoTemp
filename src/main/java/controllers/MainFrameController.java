@@ -28,7 +28,7 @@ public class MainFrameController{
 				new LoginFrame();
 				mainFrame.dispose();
 			}else if(obj == mainFrame.getBtnConsulta()) {
-				new MapFrame();
+				new MapFrame(mainFrame);
 				mainFrame.dispose();
 			}
 		}

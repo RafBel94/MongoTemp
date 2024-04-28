@@ -4,9 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -20,6 +23,7 @@ import controllers.MapFrameController;
 public class MapFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private JFrame lastFrame;
 	private JLabel lblImagen;
 	private JSeparator separator;
 	private JLabel lblSeleccion;
@@ -37,22 +41,37 @@ public class MapFrame extends JFrame {
 	private JButton btnTodo;
 	private JButton btnNada;
 	
-	public MapFrame() {
+	public MapFrame(JFrame lastFrame) {
 		setTitle("Seleccion de provincia");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 609, 517);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
+		this.lastFrame = lastFrame;
+		
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
+			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		btnNada = new JButton("");
 		btnNada.setToolTipText("Deseleccionar todo");
-		btnNada.setIcon(new ImageIcon("image/DeselectAll.png"));
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/DeselectAll.png")){
+			btnNada.setIcon(new ImageIcon(ImageIO.read(stream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		btnNada.setBounds(548, 44, 26, 25);
 		getContentPane().add(btnNada);
 		
 		btnTodo = new JButton("");
 		btnTodo.setToolTipText("Seleccionar todo");
-		btnTodo.setIcon(new ImageIcon("image/SelectAll.png"));
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/SelectAll.png")){
+			btnTodo.setIcon(new ImageIcon(ImageIO.read(stream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		btnTodo.setBounds(514, 44, 26, 25);
 		getContentPane().add(btnTodo);
 		
@@ -105,7 +124,11 @@ public class MapFrame extends JFrame {
 		getContentPane().add(cbHuelva);
 		
 		lblImagen = new JLabel();
-		lblImagen.setIcon(new ImageIcon("image/mapa.png"));
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/mapa.png")){
+			lblImagen.setIcon(new ImageIcon(ImageIO.read(stream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImagen.setBounds(4, 44, 584, 366);
 		getContentPane().add(lblImagen);
@@ -265,6 +288,14 @@ public class MapFrame extends JFrame {
 
 	public void setCbAlmeria(JCheckBox cbAlmeria) {
 		this.cbAlmeria = cbAlmeria;
+	}
+
+	public JFrame getLastFrame() {
+		return lastFrame;
+	}
+
+	public void setLastFrame(JFrame lastFrame) {
+		this.lastFrame = lastFrame;
 	}
 	
 }

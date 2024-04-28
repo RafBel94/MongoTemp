@@ -3,7 +3,11 @@ package views;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +37,12 @@ public class LoginFrame extends JFrame {
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(getParent());
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
+			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		labelUsuario = new JLabel("Usuario:");
 		labelUsuario.setHorizontalAlignment(SwingConstants.CENTER);

@@ -2,9 +2,11 @@ package views;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,6 +45,12 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
+			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		panelLogin = new JPanel();
 		panelLogin.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelLogin.setBounds(48, 227, 190, 64);
@@ -50,7 +58,11 @@ public class MainFrame extends JFrame {
 		panelLogin.setLayout(null);
 		
 		labelLogo = new JLabel();
-		labelLogo.setIcon(new ImageIcon("image/Logo.png"));
+		try(InputStream stream =  getClass().getResourceAsStream("/resources/image/Logo.png")){
+			labelLogo.setIcon(new ImageIcon(ImageIO.read(stream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLogo.setBounds(17, 5, 250, 87);
 		contentPane.add(labelLogo);

@@ -1,7 +1,11 @@
 package views;
 
 import java.awt.Font;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,13 +32,23 @@ public class InitFrame extends JFrame {
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
+			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		labelLogo = new JLabel();
 		labelLogo.setBounds(94, 23, 250, 78);
-		labelLogo.setIcon(new ImageIcon("image/Logo.png"));
+		try(InputStream inputStream = getClass().getResourceAsStream("/resources/image/Logo.png")){
+			labelLogo.setIcon(new ImageIcon(ImageIO.read(inputStream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		contentPane.add(labelLogo);
 		
 		labelConectando = new JLabel("Conectando...");

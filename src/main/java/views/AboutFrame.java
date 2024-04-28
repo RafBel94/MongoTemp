@@ -1,5 +1,9 @@
 package views;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -21,8 +25,18 @@ public class AboutFrame extends JDialog {
 		setModalityType(ModalityType.APPLICATION_MODAL);
 		getContentPane().setLayout(null);
 		
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
+			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		labelLogo = new JLabel("");
-		labelLogo.setIcon(new ImageIcon("image/LogoAbout.png"));
+		try(InputStream stream = getClass().getResourceAsStream("/resources/image/LogoAbout.png")){
+			labelLogo.setIcon(new ImageIcon(ImageIO.read(stream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLogo.setBounds(62, 11, 310, 312);
 		getContentPane().add(labelLogo);

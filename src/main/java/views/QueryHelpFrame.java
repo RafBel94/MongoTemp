@@ -1,10 +1,14 @@
 package views;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import java.awt.Font;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.swing.JTextArea;
 
 public class QueryHelpFrame extends JFrame {
@@ -20,14 +24,25 @@ public class QueryHelpFrame extends JFrame {
 	
 	public QueryHelpFrame() {
 		super("Ventana de ayuda");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 331);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
+			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		lblImagen = new JLabel("");
-		lblImagen.setIcon(new ImageIcon("image/Help55.png"));
-		lblImagen.setBounds(189, 11, 55, 57);
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/Help55.png")){
+			lblImagen.setIcon(new ImageIcon(ImageIO.read(stream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		lblImagen.setBounds(189, 18, 55, 57);
 		getContentPane().add(lblImagen);
 		
 		lblMinTemp = new JLabel("Temperatura minima");

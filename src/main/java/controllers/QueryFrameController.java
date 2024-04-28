@@ -19,6 +19,7 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 import util.MongoDBConnection;
+import views.AdminFrame;
 import views.MapFrame;
 import views.QueryFrame;
 import views.QueryHelpFrame;
@@ -93,7 +94,7 @@ public class QueryFrameController {
 			if(obj == qFrame.getBtnVolver()) {
 				qFrame.dispose();
 				MapFrameController.getJCheckBoxList().clear();
-				new MapFrame();
+					new MapFrame(qFrame.getMapOwner());
 			}else if (obj == qFrame.getBtnConsultar()) {
 				MongoDBConnection conn = MongoDBConnection.getInstance();
 				MongoDatabase db = conn.getDatabase();

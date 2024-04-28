@@ -3,7 +3,10 @@ package views;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,6 +23,7 @@ public class QueryFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JScrollPane scrollPane;
+	private JFrame mapOwner;
 	private JComboBox comboProv;
 	private JComboBox comboAnio;
 	private JComboBox comboMeses;
@@ -41,13 +45,20 @@ public class QueryFrame extends JFrame {
 	private JLabel lblTempMaxima;
 	private JLabel lblMediaTotal;
 	
-	public QueryFrame() {
+	public QueryFrame(JFrame mapOwner) {
 		super("Consultas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 438);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		getContentPane().setLayout(null);
+		this.mapOwner = mapOwner;
+		
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
+			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(15, 63, 495, 247);
@@ -150,7 +161,11 @@ public class QueryFrame extends JFrame {
 		getContentPane().add(btnConsultar);
 		
 		btnAyuda = new JButton("");
-		btnAyuda.setIcon(new ImageIcon("image/Help.png"));
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/Help.png")){
+			btnAyuda.setIcon(new ImageIcon(ImageIO.read(stream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		btnAyuda.setBounds(485, 362, 26, 26);
 		getContentPane().add(btnAyuda);
 		
@@ -272,5 +287,13 @@ public class QueryFrame extends JFrame {
 
 	public void setBtnAyuda(JButton btnAyuda) {
 		this.btnAyuda = btnAyuda;
+	}
+
+	public JFrame getMapOwner() {
+		return mapOwner;
+	}
+
+	public void setMapOwner(JFrame mapOwner) {
+		this.mapOwner = mapOwner;
 	}
 }
