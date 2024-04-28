@@ -15,15 +15,15 @@ import util.MongoDBConnection;
 import views.MainFrame;
 
 public class InitFrameController {
-	private static List<String> agesList = new ArrayList<>();
+	private static List<String> yearsList = new ArrayList<>();
 	
 	public void connect() {
 		MongoDBConnection connection = MongoDBConnection.getInstance();
-		loadAgesCombo(connection);
+		loadYearsCombo(connection);
 		new MainFrame();
 	}
 
-	private void loadAgesCombo(MongoDBConnection conn) {
+	private void loadYearsCombo(MongoDBConnection conn) {
 		List <String> ages = new ArrayList<>();
 		
 		MongoDatabase db = conn.getDatabase();
@@ -32,18 +32,18 @@ public class InitFrameController {
 		MongoCursor<Document> list = collection.find().iterator();
 		while(list.hasNext()) {
 			Document doc = list.next();
-			String age = String.valueOf(doc.get("anio"));
+			String year = String.valueOf(doc.get("anio"));
 			
-			if(!ages.contains(age)) {
-				ages.add(age);
+			if(!ages.contains(year)) {
+				ages.add(year);
 			}
 		}
 		
 		for(String age : ages)
-			agesList.add(age);
+			yearsList.add(age);
 	}
 
-	public static List<String> getAgesList() {
-		return agesList;
+	public static List<String> getYearsList() {
+		return yearsList;
 	}
 }

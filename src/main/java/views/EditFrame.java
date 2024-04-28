@@ -3,7 +3,11 @@ package views;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,14 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import org.bson.Document;
-
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
 import controllers.EditFrameController;
 import controllers.QueryFrameController;
-import util.MongoDBConnection;
 
 public class EditFrame extends JFrame {
 
@@ -45,14 +43,21 @@ public class EditFrame extends JFrame {
 	private JLabel lblTempMaxNew;
 	private JTextField fieldTempMaxNew;
 	private JButton btnApply;
+	private JButton btnVolver;
 	public EditFrame(QueryFrameController qFrameController) {
 		setTitle("Editar temperatura");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 241);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		setBounds(100, 100, 450, 246);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		getContentPane().setLayout(null);
 		this.qFrameController = qFrameController;
+		
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
+			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(SystemColor.activeCaption));
@@ -164,8 +169,17 @@ public class EditFrame extends JFrame {
 		
 		btnApply = new JButton("Aplicar");
 		btnApply.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnApply.setBounds(171, 170, 89, 23);
+		btnApply.setBounds(171, 170, 89, 28);
 		getContentPane().add(btnApply);
+		
+		btnVolver = new JButton("");
+		try(InputStream stream = getClass().getResourceAsStream("/resources/image/Return25.png")){
+			btnVolver.setIcon(new ImageIcon(ImageIO.read(stream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		btnVolver.setBounds(399, 170, 28, 28);
+		getContentPane().add(btnVolver);
 		
 		setVisible(true);
 		
@@ -198,6 +212,7 @@ public class EditFrame extends JFrame {
 
 	public void addActListener(ActionListener listener) {
 		btnApply.addActionListener(listener);
+		btnVolver.addActionListener(listener);
 	}
 
 	public JTextField getFieldProvince() {

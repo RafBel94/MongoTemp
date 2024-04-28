@@ -1,46 +1,104 @@
 package views;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-public class AboutFrame extends JDialog {
+public class AboutFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel labelLogo;
-	/**
-	 * Create the dialog.
-	 */
+	private JLabel lblLogo;
+	private JSeparator separator;
+	private JLabel lblAbout;
+	private JLabel lblRafael;
+	private JSeparator separator_1;
+	private JLabel lblDesarrollo;
+	private JLabel lblCollabs;
+	private JLabel lblAlejandro;
+	private JSeparator separator_2;
+	private JLabel lblAntonio;
 	public AboutFrame() {
-		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		super("Acerca de MongoTemp...");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 450, 415);
 		setResizable(false);
-		setTitle("Sobre el equipo");
-		setBounds(100, 100, 450, 421);
-		setLocationRelativeTo(getParent());
-		setModalityType(ModalityType.APPLICATION_MODAL);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")) {
 			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		labelLogo = new JLabel("");
-		try(InputStream stream = getClass().getResourceAsStream("/resources/image/LogoAbout.png")){
-			labelLogo.setIcon(new ImageIcon(ImageIO.read(stream)));
+		lblLogo = new JLabel("");
+		try (InputStream stream = getClass().getResourceAsStream("/resources/image/LogoAbout.png")) {
+			lblLogo.setIcon(new ImageIcon(ImageIO.read(stream)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
-		labelLogo.setBounds(62, 11, 310, 312);
-		getContentPane().add(labelLogo);
+		lblLogo.setBounds(142, 22, 150, 150);
+		getContentPane().add(lblLogo);
+		
+		separator = new JSeparator();
+		separator.setBounds(25, 189, 383, 9);
+		getContentPane().add(separator);
+		
+		lblAbout = new JLabel("Acerca de MongoTemp");
+		lblAbout.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAbout.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblAbout.setBounds(89, 196, 255, 25);
+		getContentPane().add(lblAbout);
+		
+		lblRafael = new JLabel("Rafael Beltran Caceres");
+		lblRafael.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRafael.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblRafael.setBounds(133, 264, 166, 21);
+		getContentPane().add(lblRafael);
+		
+		separator_1 = new JSeparator();
+		separator_1.setBounds(136, 230, 161, 9);
+		getContentPane().add(separator_1);
+		
+		lblDesarrollo = new JLabel("Desarrollador del Software");
+		lblDesarrollo.setForeground(Color.BLUE);
+		lblDesarrollo.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblDesarrollo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDesarrollo.setBounds(107, 240, 219, 14);
+		getContentPane().add(lblDesarrollo);
+		
+		lblCollabs = new JLabel("Documentacion");
+		lblCollabs.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCollabs.setForeground(Color.BLUE);
+		lblCollabs.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblCollabs.setBounds(107, 307, 219, 14);
+		getContentPane().add(lblCollabs);
+		
+		lblAlejandro = new JLabel("Alejandro Fernandez Franco");
+		lblAlejandro.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAlejandro.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAlejandro.setBounds(120, 323, 192, 22);
+		getContentPane().add(lblAlejandro);
+		
+		separator_2 = new JSeparator();
+		separator_2.setBounds(136, 292, 161, 9);
+		getContentPane().add(separator_2);
+		
+		lblAntonio = new JLabel("Antonio Sanchez Rosales");
+		lblAntonio.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAntonio.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblAntonio.setBounds(120, 345, 192, 22);
+		getContentPane().add(lblAntonio);
 		
 		setVisible(true);
 	}
+
 }

@@ -21,7 +21,6 @@ public class AdminFrame extends JFrame {
 	private JLabel labelLogo;
 	private JSeparator separator;
 	private JButton btnAdministrar;
-	private JButton btnAdminUsers;
 
 	/**
 	 * Create the frame.
@@ -30,7 +29,7 @@ public class AdminFrame extends JFrame {
 		setTitle("Panel de administrador");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 311, 288);
+		setBounds(100, 100, 311, 237);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 
@@ -54,7 +53,7 @@ public class AdminFrame extends JFrame {
 		getContentPane().add(separator);
 
 		btnVolver = new JButton("");
-		btnVolver.setBounds(128, 203, 34, 34);
+		btnVolver.setBounds(129, 154, 34, 34);
 		getContentPane().add(btnVolver);
 		try(InputStream stream = getClass().getResourceAsStream("/resources/image/Return.png")){
 		btnVolver.setIcon(new ImageIcon(ImageIO.read(stream)));
@@ -67,11 +66,6 @@ public class AdminFrame extends JFrame {
 		btnAdministrar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAdministrar.setBounds(76, 102, 141, 41);
 		getContentPane().add(btnAdministrar);
-		
-		btnAdminUsers = new JButton("Admin Users");
-		btnAdminUsers.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnAdminUsers.setBounds(76, 150, 141, 41);
-		getContentPane().add(btnAdminUsers);
 
 		setVisible(true);
 

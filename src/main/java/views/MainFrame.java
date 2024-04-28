@@ -53,7 +53,7 @@ public class MainFrame extends JFrame {
 		
 		panelLogin = new JPanel();
 		panelLogin.setBorder(new LineBorder(new Color(0, 0, 0)));
-		panelLogin.setBounds(48, 227, 190, 64);
+		panelLogin.setBounds(47, 227, 190, 64);
 		contentPane.add(panelLogin);
 		panelLogin.setLayout(null);
 		
@@ -69,12 +69,17 @@ public class MainFrame extends JFrame {
 		
 		btnConsulta = new JButton("Realizar Consulta");
 		btnConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnConsulta.setBounds(37, 126, 213, 72);
+		btnConsulta.setBounds(35, 126, 213, 72);
 		contentPane.add(btnConsulta);
 		
-		btnAbout = new JButton("?");
+		btnAbout = new JButton("");
+		try(InputStream stream =  getClass().getResourceAsStream("/resources/image/AboutButton.png")){
+			btnAbout.setIcon(new ImageIcon(ImageIO.read(stream)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		btnAbout.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnAbout.setBounds(249, 268, 25, 23);
+		btnAbout.setBounds(248, 261, 30, 30);
 		contentPane.add(btnAbout);
 		
 		separator = new JSeparator();

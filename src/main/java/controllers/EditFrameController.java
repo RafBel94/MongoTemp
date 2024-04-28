@@ -25,34 +25,41 @@ public class EditFrameController {
 	private class ActListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			MongoDBConnection conn = MongoDBConnection.getInstance();
-			MongoDatabase db = conn.getDatabase();
-			MongoCollection<Document> collection = db.getCollection("temperatures");
+			Object obj = e.getSource();
 			
-			String province = eFrame.getFieldProvince().getText();
-			int age = Integer.parseInt(eFrame.getFieldAge().getText());
-			String month = eFrame.getFieldMonth().getText();
-			int day = Integer.parseInt(eFrame.getFieldDay().getText());
-			
-			int checkTempValue = checkTempFields();
-			if(checkTempValue == 0) {
-				JOptionPane.showMessageDialog(eFrame, "Ambos campos de temperaturas no pueden estar vacios, debe rellenar uno como minimo.","Error",JOptionPane.ERROR_MESSAGE);
-			}else if(checkTempValue == 1){
-				updateMaxTemp(province,age,month,day, collection);
-			}else if(checkTempValue == 2) {
-				updateMinTemp(province,age,month,day, collection);
-			}else if(checkTempValue == 3) {
-				updateBothTemps(province,age,month,day, collection);
-			}else if(checkTempValue == -1) {
-				JOptionPane.showMessageDialog(eFrame, "Los valores no pueden ser letras ni decimales","Error",JOptionPane.ERROR_MESSAGE);
+			if(obj == eFrame.getBtnApply()) {
+				MongoDBConnection conn = MongoDBConnection.getInstance();
+				MongoDatabase db = conn.getDatabase();
+				MongoCollection<Document> collection = db.getCollection("temperatures");
+				
+				String province = eFrame.getFieldProvince().getText();
+				int year = Integer.parseInt(eFrame.getFieldAge().getText());
+				String month = eFrame.getFieldMonth().getText();
+				int day = Integer.parseInt(eFrame.getFieldDay().getText());
+				
+				int checkTempValue = checkTempFields();
+				if(checkTempValue == 0) {
+					JOptionPane.showMessageDialog(eFrame, "Ambos campos de temperaturas no pueden estar vacios, debe rellenar uno como minimo.","Error",JOptionPane.ERROR_MESSAGE);
+				}else if(checkTempValue == 1){
+					updateMaxTemp(province,year,month,day, collection);
+				}else if(checkTempValue == 2) {
+					updateMinTemp(province,year,month,day, collection);
+				}else if(checkTempValue == 3) {
+					updateBothTemps(province,year,month,day, collection);
+				}else if(checkTempValue == -1) {
+					JOptionPane.showMessageDialog(eFrame, "Los valores no pueden ser letras ni decimales","Error",JOptionPane.ERROR_MESSAGE);
+				}
+			}else {
+				eFrame.dispose();
+				eFrame.getqFrameController().getqFrame().setEnabled(true);
 			}
 		}
 
-		private void updateBothTemps(String province, int age, String month, int day, MongoCollection<Document> col) {
+		private void updateBothTemps(String province, int year, String month, int day, MongoCollection<Document> col) {
 			int newMinTemp = Integer.parseInt(eFrame.getFieldTempMinNew().getText());
 			int newMaxTemp = Integer.parseInt(eFrame.getFieldTempMaxNew().getText());
 			
-			Document filter = new Document("provincia",province).append("anio", age).append("mes", month).append("dia", day);
+			Document filter = new Document("provincia",province).append("anio", year).append("mes", month).append("dia", day);
 			Document update = new Document("$set", new Document("minTemp", newMinTemp).append("maxTemp", newMaxTemp));
 			
 			col.findOneAndUpdate(filter, update);
@@ -60,12 +67,13 @@ public class EditFrameController {
 			JOptionPane.showMessageDialog(eFrame, "Temperaturas actualizadas, vuelva a ejecutar la consulta para ver los cambios","Actualizacion correcta",JOptionPane.INFORMATION_MESSAGE);
 			
 			eFrame.dispose();
+			eFrame.getqFrameController().getqFrame().setEnabled(true);
 		}
 
-		private void updateMinTemp(String province, int age, String month, int day, MongoCollection<Document> col) {
+		private void updateMinTemp(String province, int year, String month, int day, MongoCollection<Document> col) {
 			int newMinTemp = Integer.parseInt(eFrame.getFieldTempMinNew().getText());
 			
-			Document filter = new Document("provincia",province).append("anio", age).append("mes", month).append("dia", day);
+			Document filter = new Document("provincia",province).append("anio", year).append("mes", month).append("dia", day);
 			Document update = new Document("$set", new Document("minTemp", newMinTemp));
 			
 			col.findOneAndUpdate(filter, update);
@@ -73,12 +81,13 @@ public class EditFrameController {
 			JOptionPane.showMessageDialog(eFrame, "Temperatura minima actualizada, vuelva a ejecutar la consulta para ver los cambios","Actualizacion correcta",JOptionPane.INFORMATION_MESSAGE);
 			
 			eFrame.dispose();
+			eFrame.getqFrameController().getqFrame().setEnabled(true);
 		}
 
-		private void updateMaxTemp(String province, int age, String month, int day, MongoCollection<Document> col) {
+		private void updateMaxTemp(String province, int year, String month, int day, MongoCollection<Document> col) {
 			int newMaxTemp = Integer.parseInt(eFrame.getFieldTempMaxNew().getText());
 			
-			Document filter = new Document("provincia",province).append("anio", age).append("mes", month).append("dia", day);
+			Document filter = new Document("provincia",province).append("anio", year).append("mes", month).append("dia", day);
 			Document update = new Document("$set", new Document("maxTemp", newMaxTemp));
 			
 			col.findOneAndUpdate(filter, update);
@@ -86,6 +95,7 @@ public class EditFrameController {
 			JOptionPane.showMessageDialog(eFrame, "Temperatura maxima actualizada, vuelva a ejecutar la consulta para ver los cambios","Actualizacion correcta",JOptionPane.INFORMATION_MESSAGE);
 			
 			eFrame.dispose();
+			eFrame.getqFrameController().getqFrame().setEnabled(true);
 		}
 
 		private int checkTempFields() {
