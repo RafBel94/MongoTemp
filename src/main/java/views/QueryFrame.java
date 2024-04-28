@@ -1,5 +1,6 @@
 package views;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
@@ -12,10 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import controllers.QueryFrameController;
 
@@ -44,11 +47,16 @@ public class QueryFrame extends JFrame {
 	private JLabel lblMinimaTotal;
 	private JLabel lblTempMaxima;
 	private JLabel lblMediaTotal;
+	private JPanel adminPanel;
+	private JButton btnEditar;
+	private JButton btnEliminar;
+	private JButton btnInsertar;
+	private JLabel lblAdminTools;
 	
 	public QueryFrame(JFrame mapOwner) {
 		super("Consultas");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 543, 438);
+		setBounds(100, 100, 543, 513);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		getContentPane().setLayout(null);
@@ -173,6 +181,38 @@ public class QueryFrame extends JFrame {
 		separator.setBounds(16, 351, 495, 14);
 		getContentPane().add(separator);
 		
+		adminPanel = new JPanel();
+		adminPanel.setBorder(new LineBorder(new Color(153, 180, 209)));
+		adminPanel.setBounds(15, 399, 502, 68);
+		getContentPane().add(adminPanel);
+		adminPanel.setLayout(null);
+		
+		btnEditar = new JButton("Editar");
+		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnEditar.setBounds(352, 34, 89, 23);
+		adminPanel.add(btnEditar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnEliminar.setBounds(205, 34, 89, 23);
+		adminPanel.add(btnEliminar);
+		
+		btnInsertar = new JButton("Insertar");
+		btnInsertar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnInsertar.setBounds(58, 34, 89, 23);
+		adminPanel.add(btnInsertar);
+		
+		lblAdminTools = new JLabel("Herramientas de administrador");
+		lblAdminTools.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAdminTools.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAdminTools.setBounds(145, 7, 212, 14);
+		adminPanel.add(lblAdminTools);
+		
+		if(mapOwner instanceof MainFrame) {
+			btnInsertar.setEnabled(false);
+			btnEliminar.setEnabled(false);
+			btnEditar.setEnabled(false);
+		}
 		
 		setVisible(true);
 		
@@ -183,6 +223,9 @@ public class QueryFrame extends JFrame {
 		btnAyuda.addActionListener(listener);
 		btnConsultar.addActionListener(listener);
 		btnVolver.addActionListener(listener);
+		btnEditar.addActionListener(listener);
+		btnEliminar.addActionListener(listener);
+		btnInsertar.addActionListener(listener);
 	}
 	
 	public void addItmListener(ItemListener listener) {
@@ -287,6 +330,30 @@ public class QueryFrame extends JFrame {
 
 	public void setBtnAyuda(JButton btnAyuda) {
 		this.btnAyuda = btnAyuda;
+	}
+
+	public JButton getBtnEditar() {
+		return btnEditar;
+	}
+
+	public void setBtnEditar(JButton btnEditar) {
+		this.btnEditar = btnEditar;
+	}
+
+	public JButton getBtnEliminar() {
+		return btnEliminar;
+	}
+
+	public void setBtnEliminar(JButton btnEliminar) {
+		this.btnEliminar = btnEliminar;
+	}
+
+	public JButton getBtnInsertar() {
+		return btnInsertar;
+	}
+
+	public void setBtnInsertar(JButton btnInsertar) {
+		this.btnInsertar = btnInsertar;
 	}
 
 	public JFrame getMapOwner() {

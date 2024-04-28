@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import views.AdminFrame;
 import views.MainFrame;
 import views.MapFrame;
-import views.UpdateFrame;
 
 public class AdminFrameController {
 	private AdminFrame adFrame;
@@ -30,12 +29,9 @@ public class AdminFrameController {
 					adFrame.dispose();
 					new MainFrame();
 				}
-			} else if (obj == adFrame.getBtnConsulta()) {
+			}else if (obj == adFrame.getBtnAdministrar()) {
 				adFrame.dispose();
 				new MapFrame(adFrame);
-			} else if (obj == adFrame.getBtnActualizar()) {
-				adFrame.dispose();
-				new UpdateFrame();
 			}
 		}
 	}

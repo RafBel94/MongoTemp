@@ -68,7 +68,7 @@ public class MainFrame extends JFrame {
 		contentPane.add(labelLogo);
 		
 		btnConsulta = new JButton("Realizar Consulta");
-		btnConsulta.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnConsulta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnConsulta.setBounds(37, 126, 213, 72);
 		contentPane.add(btnConsulta);
 		
