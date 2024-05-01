@@ -22,22 +22,23 @@ import util.ImageLoader;
 public class InsertFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private InsertFrameController iFrameController;
 	private QueryFrame qFrame;
 	private JLabel lblProvince;
 	private JLabel lblYear;
 	private JLabel lblMonth;
 	private JLabel lblDay;
 	private JLabel lblMinTemp;
-	private JTextField fieldMinTemp;
 	private JLabel lblMaxTemp;
+	private JTextField fieldMinTemp;
 	private JTextField fieldMaxTemp;
+	private JTextField fieldYear;
 	private JButton btnInsert;
 	private JButton btnVolver;
-	private JSeparator separator;
 	private JComboBox comboProvinces;
 	private JComboBox comboMonths;
 	private JSpinner spinnerDays;
-	private JTextField fieldYear;
+	private JSeparator separator;
 
 	/**
 	 * Create the frame.
@@ -50,7 +51,7 @@ public class InsertFrame extends JFrame {
 		setLocationRelativeTo(qFrame);
 		getContentPane().setLayout(null);
 		this.qFrame = qFrame;
-		
+
 		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
 
 		lblProvince = new JLabel("Provincia:");
@@ -107,38 +108,41 @@ public class InsertFrame extends JFrame {
 		separator = new JSeparator();
 		separator.setBounds(14, 130, 354, 8);
 		getContentPane().add(separator);
-		
-		String[] provinces = {"Cadiz","Malaga","Sevilla","Huelva","Granada","Cordoba","Almeria","Jaen"};
+
+		String[] provinces = { "Cadiz", "Malaga", "Sevilla", "Huelva", "Granada", "Cordoba", "Almeria", "Jaen" };
 		comboProvinces = new JComboBox(provinces);
 		comboProvinces.setBounds(79, 8, 86, 22);
 		getContentPane().add(comboProvinces);
-		
+
 		String[] months = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
 				"Octubre", "Noviembre", "Diciembre" };
 		comboMonths = new JComboBox(months);
 		comboMonths.setBounds(79, 62, 86, 22);
 		getContentPane().add(comboMonths);
-		
+
 		spinnerDays = new JSpinner();
 		spinnerDays.setModel(new SpinnerNumberModel(1, 1, 31, 1));
 		spinnerDays.setBounds(79, 90, 45, 20);
 		getContentPane().add(spinnerDays);
-		
+
 		fieldYear = new JTextField("2017");
 		fieldYear.setBounds(79, 36, 86, 20);
 		getContentPane().add(fieldYear);
 		fieldYear.setColumns(10);
-		
+
 		setVisible(true);
-		
-		InsertFrameController iFrameController = new InsertFrameController(this);
+
+		iFrameController = new InsertFrameController(this);
 	}
-	
+
 	public void addActListener(ActionListener listener) {
 		btnInsert.addActionListener(listener);
 		btnVolver.addActionListener(listener);
 	}
-	
+
+	public InsertFrameController getiFrameController() {
+		return iFrameController;
+	}
 
 	public JTextField getFieldYear() {
 		return fieldYear;

@@ -20,18 +20,18 @@ public class LoginFrameController {
 	public LoginFrameController(LoginFrame lFrame) {
 		this.loginFrame = lFrame;
 		
-		loginFrame.addLoginListener(new LoginListener());
+		loginFrame.addActListener(new ActListener());
 	}
 	
-	private class LoginListener implements ActionListener {
+	private class ActListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
 			
 			if(obj == loginFrame.getBtnLogin() || obj == loginFrame.getTextUsuario() || obj == loginFrame.getTextPassword()) {
-				if(connectAndCheckCredentials()) {
+				if(checkCredentials()) {
 					loginFrame.dispose();
-					AdminFrame admFrame = new AdminFrame();
+					new AdminFrame();
 				}else {
 					loginFrame.getLabelError().setText("El usuario o el password no son correctos");
 				}
@@ -40,7 +40,7 @@ public class LoginFrameController {
 				new MainFrame();
 			}
 		}
-		private boolean connectAndCheckCredentials() {
+		private boolean checkCredentials() {
 			MongoDBConnection connection = MongoDBConnection.getInstance();
 			MongoCollection<Document> adminCollection = connection.getDatabase().getCollection("admin");
 

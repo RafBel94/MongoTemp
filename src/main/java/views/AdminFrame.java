@@ -18,10 +18,11 @@ import util.ImageLoader;
 public class AdminFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private JButton btnVolver;
+	private AdminFrameController adController;
 	private JLabel labelLogo;
-	private JSeparator separator;
+	private JButton btnVolver;
 	private JButton btnAdministrar;
+	private JSeparator separator;
 
 	/**
 	 * Create the frame.
@@ -57,13 +58,17 @@ public class AdminFrame extends JFrame {
 		getContentPane().add(btnAdministrar);
 
 		setVisible(true);
-
-		AdminFrameController adFrameController = new AdminFrameController(this);
+		
+		adController = new AdminFrameController(this);
 	}
 
 	public void addListeners(ActionListener actionListener) {
 		btnAdministrar.addActionListener(actionListener);
 		btnVolver.addActionListener(actionListener);
+	}
+
+	public AdminFrameController getAdController() {
+		return adController;
 	}
 
 	public JLabel getLabelLogo() {

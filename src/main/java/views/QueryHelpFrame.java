@@ -16,12 +16,12 @@ import util.ImageLoader;
 public class QueryHelpFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
 	private JLabel lblImagen;
 	private JLabel lblMinTemp;
-	private JScrollPane scrollPane;
-	private JTextArea tAreaMinTemp;
 	private JLabel lblMaxTemp;
-	private JScrollPane scrollPane_1;
+	private JTextArea tAreaMinTemp;
 	private JTextArea tAreaMaxTemp;
 	
 	public QueryHelpFrame() {

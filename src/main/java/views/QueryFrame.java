@@ -37,23 +37,23 @@ public class QueryFrame extends JFrame {
 	private JLabel lblMeses;
 	private JLabel lblMin;
 	private JLabel lblMax;
-	private JTextField textMin;
-	private JTextField textMax;
-	private JSeparator separator;
-	private JButton btnVolver;
-	private JButton btnConsultar;
-	private JButton btnAyuda;
-	private JTextField textMinimaTotal;
-	private JTextField textMaximaTotal;
-	private JTextField textMediaTotal;
 	private JLabel lblMinimaTotal;
 	private JLabel lblTempMaxima;
 	private JLabel lblMediaTotal;
+	private JLabel lblAdminTools;
+	private JTextField textMin;
+	private JTextField textMax;
+	private JTextField textMinimaTotal;
+	private JTextField textMaximaTotal;
+	private JTextField textMediaTotal;
 	private JPanel adminPanel;
+	private JButton btnVolver;
+	private JButton btnConsultar;
+	private JButton btnAyuda;
 	private JButton btnEditar;
 	private JButton btnEliminar;
 	private JButton btnInsertar;
-	private JLabel lblAdminTools;
+	private JSeparator separator;
 	
 	public QueryFrame(JFrame mapOwner) {
 		super("Consultas");

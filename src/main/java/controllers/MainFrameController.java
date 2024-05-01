@@ -14,10 +14,10 @@ public class MainFrameController{
 	public MainFrameController(MainFrame mFrame) {
 		this.mainFrame = mFrame;
 		
-		mainFrame.addLoginListener(new LoginListener());
+		mainFrame.addActListener(new ActListener());
 	}
 	
-	private class LoginListener implements ActionListener {
+	private class ActListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Object obj = e.getSource();
