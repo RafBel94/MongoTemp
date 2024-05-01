@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controllers.InitFrameController;
+import util.ImageLoader;
 
 public class InitFrame extends JFrame {
 
@@ -33,22 +34,14 @@ public class InitFrame extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
-			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		labelLogo = new JLabel();
 		labelLogo.setBounds(94, 23, 250, 78);
-		try(InputStream inputStream = getClass().getResourceAsStream("/resources/image/Logo.png")){
-			labelLogo.setIcon(new ImageIcon(ImageIO.read(inputStream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJLabelImage("/resources/image/Logo.png", this, labelLogo);
 		contentPane.add(labelLogo);
 		
 		labelConectando = new JLabel("Conectando...");

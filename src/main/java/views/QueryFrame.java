@@ -21,6 +21,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import controllers.QueryFrameController;
+import util.ImageLoader;
 
 public class QueryFrame extends JFrame {
 
@@ -63,11 +64,7 @@ public class QueryFrame extends JFrame {
 		getContentPane().setLayout(null);
 		this.mapOwner = mapOwner;
 		
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
-			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(15, 63, 495, 247);
@@ -170,11 +167,7 @@ public class QueryFrame extends JFrame {
 		getContentPane().add(btnConsultar);
 		
 		btnAyuda = new JButton("");
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/Help.png")){
-			btnAyuda.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJButtonImage("/resources/image/Help.png", this, btnAyuda);
 		btnAyuda.setBounds(485, 362, 26, 26);
 		getContentPane().add(btnAyuda);
 		

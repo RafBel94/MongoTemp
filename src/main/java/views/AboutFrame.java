@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
+import util.ImageLoader;
+
 public class AboutFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -33,18 +35,11 @@ public class AboutFrame extends JFrame {
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")) {
-			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
+		
 		
 		lblLogo = new JLabel("");
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/LogoAbout.png")) {
-			lblLogo.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJLabelImage("/resources/image/LogoAbout.png", this, lblLogo);
 		lblLogo.setBounds(142, 22, 150, 150);
 		getContentPane().add(lblLogo);
 		

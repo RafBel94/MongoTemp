@@ -17,6 +17,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
 import controllers.InsertFrameController;
+import util.ImageLoader;
 
 public class InsertFrame extends JFrame {
 
@@ -50,11 +51,7 @@ public class InsertFrame extends JFrame {
 		getContentPane().setLayout(null);
 		this.qFrame = qFrame;
 		
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
-			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
 
 		lblProvince = new JLabel("Provincia:");
 		lblProvince.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -102,11 +99,7 @@ public class InsertFrame extends JFrame {
 		getContentPane().add(btnInsert);
 
 		btnVolver = new JButton("");
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/Return25.png")){
-			btnVolver.setIcon(new ImageIcon(new ImageIcon(ImageIO.read(stream)).getImage()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJButtonImage("/resources/image/Return25.png", this, btnVolver);
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnVolver.setBounds(337, 140, 28, 28);
 		getContentPane().add(btnVolver);

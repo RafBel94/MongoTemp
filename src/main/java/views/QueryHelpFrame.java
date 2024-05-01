@@ -1,15 +1,17 @@
 package views;
 
+import java.awt.Font;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-import java.awt.Font;
-import java.io.IOException;
-import java.io.InputStream;
-
 import javax.swing.JTextArea;
+
+import util.ImageLoader;
 
 public class QueryHelpFrame extends JFrame {
 
@@ -30,18 +32,10 @@ public class QueryHelpFrame extends JFrame {
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
-			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
 		
 		lblImagen = new JLabel("");
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/Help55.png")){
-			lblImagen.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJLabelImage("/resources/image/Help55.png", this, lblImagen);
 		lblImagen.setBounds(189, 18, 55, 57);
 		getContentPane().add(lblImagen);
 		

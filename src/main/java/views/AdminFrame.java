@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JSeparator;
 
 import controllers.AdminFrameController;
+import util.ImageLoader;
 
 public class AdminFrame extends JFrame {
 
@@ -33,19 +34,11 @@ public class AdminFrame extends JFrame {
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")) {
-			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
 
 		labelLogo = new JLabel();
 		labelLogo.setBounds(23, 16, 250, 62);
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/LogoAdmin.png")) {
-			labelLogo.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJLabelImage("/resources/image/LogoAdmin.png", this, labelLogo);
 		getContentPane().add(labelLogo);
 
 		separator = new JSeparator();
@@ -53,13 +46,9 @@ public class AdminFrame extends JFrame {
 		getContentPane().add(separator);
 
 		btnVolver = new JButton("");
+		ImageLoader.loadJButtonImage("/resources/image/Return.png", this, btnVolver);
 		btnVolver.setBounds(129, 154, 34, 34);
 		getContentPane().add(btnVolver);
-		try(InputStream stream = getClass().getResourceAsStream("/resources/image/Return.png")){
-		btnVolver.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		btnVolver.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		btnAdministrar = new JButton("Admin BBDD");

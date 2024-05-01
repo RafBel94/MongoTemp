@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import controllers.MainFrameController;
+import util.ImageLoader;
 
 public class MainFrame extends JFrame {
 
@@ -45,11 +46,7 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
-			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
 		
 		panelLogin = new JPanel();
 		panelLogin.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -58,11 +55,7 @@ public class MainFrame extends JFrame {
 		panelLogin.setLayout(null);
 		
 		labelLogo = new JLabel();
-		try(InputStream stream =  getClass().getResourceAsStream("/resources/image/Logo.png")){
-			labelLogo.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJLabelImage("/resources/image/Logo.png", this, labelLogo);
 		labelLogo.setHorizontalAlignment(SwingConstants.CENTER);
 		labelLogo.setBounds(17, 5, 250, 87);
 		contentPane.add(labelLogo);
@@ -73,11 +66,7 @@ public class MainFrame extends JFrame {
 		contentPane.add(btnConsulta);
 		
 		btnAbout = new JButton("");
-		try(InputStream stream =  getClass().getResourceAsStream("/resources/image/AboutButton.png")){
-			btnAbout.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJButtonImage("/resources/image/AboutButton.png", this, btnAbout);
 		btnAbout.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		btnAbout.setBounds(248, 261, 30, 30);
 		contentPane.add(btnAbout);

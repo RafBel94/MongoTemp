@@ -20,6 +20,7 @@ import javax.swing.border.LineBorder;
 
 import controllers.EditFrameController;
 import controllers.QueryFrameController;
+import util.ImageLoader;
 
 public class EditFrame extends JFrame {
 
@@ -53,11 +54,7 @@ public class EditFrame extends JFrame {
 		getContentPane().setLayout(null);
 		this.qFrameController = qFrameController;
 		
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
-			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
 		
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(SystemColor.activeCaption));
@@ -173,11 +170,7 @@ public class EditFrame extends JFrame {
 		getContentPane().add(btnApply);
 		
 		btnVolver = new JButton("");
-		try(InputStream stream = getClass().getResourceAsStream("/resources/image/Return25.png")){
-			btnVolver.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJButtonImage("/resources/image/Return25.png", this, btnVolver);
 		btnVolver.setBounds(399, 170, 28, 28);
 		getContentPane().add(btnVolver);
 		

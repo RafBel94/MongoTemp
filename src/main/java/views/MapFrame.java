@@ -19,6 +19,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
 import controllers.MapFrameController;
+import util.ImageLoader;
 
 public class MapFrame extends JFrame {
 
@@ -49,29 +50,17 @@ public class MapFrame extends JFrame {
 		getContentPane().setLayout(null);
 		this.lastFrame = lastFrame;
 		
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/FrameIcon.png")){
-			setIconImage(new ImageIcon(ImageIO.read(stream)).getImage());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadFrameIcon("/resources/image/FrameIcon.png", this);
 		
 		btnNada = new JButton("");
 		btnNada.setToolTipText("Deseleccionar todo");
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/DeselectAll.png")){
-			btnNada.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJButtonImage("/resources/image/DeselectAll.png", this, btnNada);
 		btnNada.setBounds(548, 44, 26, 25);
 		getContentPane().add(btnNada);
 		
 		btnTodo = new JButton("");
 		btnTodo.setToolTipText("Seleccionar todo");
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/SelectAll.png")){
-			btnTodo.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJButtonImage("/resources/image/SelectAll.png", this, btnTodo);
 		btnTodo.setBounds(514, 44, 26, 25);
 		getContentPane().add(btnTodo);
 		
@@ -124,11 +113,7 @@ public class MapFrame extends JFrame {
 		getContentPane().add(cbHuelva);
 		
 		lblImagen = new JLabel();
-		try (InputStream stream = getClass().getResourceAsStream("/resources/image/mapa.png")){
-			lblImagen.setIcon(new ImageIcon(ImageIO.read(stream)));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ImageLoader.loadJLabelImage("/resources/image/mapa.png", this, lblImagen);
 		lblImagen.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImagen.setBounds(4, 44, 584, 366);
 		getContentPane().add(lblImagen);
