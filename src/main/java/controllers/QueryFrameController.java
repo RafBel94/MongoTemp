@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JCheckBox;
@@ -27,6 +28,7 @@ import views.QueryFrame;
 import views.QueryHelpFrame;
 
 public class QueryFrameController {
+	List<String> yearList = new ArrayList<>();
 	private DefaultTableModel model;
 	private JTable table;
 	private QueryFrame qFrame;
@@ -78,10 +80,11 @@ public class QueryFrameController {
 			qFrame.getComboProv().addItem(provincesList.get(i).getToolTipText());
 		}
 
+		
 		// Ages JComboBox Set
-		for (String year : InitFrameController.getYearsList()) {
-			qFrame.getComboAnio().addItem(year);
-		}
+		loadYears();
+		updateYearsCombo();
+		
 
 		// Months JComboBox Set
 		String[] months = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
@@ -91,6 +94,32 @@ public class QueryFrameController {
 		}
 	}
 	
+	public void updateYearsCombo() {
+		qFrame.getComboAnio().removeAllItems();
+		for (String year : yearList) {
+			qFrame.getComboAnio().addItem(year);
+		}
+	}
+
+	private void loadYears() {
+		MongoDatabase db = MongoDBConnection.getInstance().getDatabase();
+		MongoCollection<Document> collection = db.getCollection("temperatures");
+		
+		MongoCursor<Document> list = collection.find().iterator();
+		while(list.hasNext()) {
+			Document doc = list.next();
+			String year = String.valueOf(doc.get("anio"));
+			
+			if(!yearList.contains(year)) {
+				yearList.add(year);
+			}
+		}
+	}
+	
+	public List<String> getYearList() {
+		return yearList;
+	}
+
 	public DefaultTableModel getModel() {
 		return model;
 	}
@@ -193,9 +222,11 @@ public class QueryFrameController {
 			Document filter = new Document("provincia",province).append("anio", year).append("mes", month).append("dia", day);
 			Document deleted = collection.findOneAndDelete(filter);
 			
-			if(deleted != null)
+			if(deleted != null) {
 				JOptionPane.showMessageDialog(qFrame, "El registro se ha eliminado con exito, vuelva a realizar la consulta para ver los cambios","Eliminacion correcta",JOptionPane.INFORMATION_MESSAGE);
-			else
+				yearList.remove(String.valueOf(year));
+				updateYearsCombo();
+			}else
 				JOptionPane.showMessageDialog(qFrame, "Documento no encontrado","Error",JOptionPane.ERROR_MESSAGE);
 		}
 

@@ -33,6 +33,7 @@ public class InsertFrameController {
 			
 			if(obj == iFrame.getBtnInsert()) {
 				insertTemperature();
+				qFrame.getqFrameController().updateYearsCombo();
 			}else if(obj == iFrame.getBtnVolver()) {
 				iFrame.dispose();
 				qFrame.setEnabled(true);
@@ -59,7 +60,11 @@ public class InsertFrameController {
 					
 					Document toInsert = new Document("provincia",province).append("mes", month).append("dia", day).append("anio", year).append("minTemp", minTemp).append("maxTemp", maxTemp).append("tempMedia", avgTemp);
 					collection.insertOne(toInsert);
+					
+					// Comprobamos si el año se encuentra en la lista, y si no es asi, se añade a esta
+					addYearToList(year);
 					JOptionPane.showMessageDialog(iFrame, "Documento insertado correctamente, vuelva a realizar una consulta para ver los cambios","Insercion correcta",JOptionPane.INFORMATION_MESSAGE);
+					
 					iFrame.dispose();
 					qFrame.setEnabled(true);
 				}else {
@@ -70,6 +75,12 @@ public class InsertFrameController {
 			}
 		}
 
+		private void addYearToList(int year) {
+			if(!qFrame.getqFrameController().getYearList().contains(String.valueOf(year))){
+				qFrame.getqFrameController().getYearList().add(String.valueOf(year));
+			}
+		}
+		
 		private boolean checkRepeated(String province, String month, int year, int day, MongoCollection<Document> col) {
 			Document filter = new Document("provincia",province).append("anio", year).append("mes", month).append("dia", day);
 			Document foundDocument = col.find(filter).first();

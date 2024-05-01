@@ -25,6 +25,7 @@ import controllers.QueryFrameController;
 public class QueryFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	QueryFrameController qFrameController;
 	private JScrollPane scrollPane;
 	private JFrame mapOwner;
 	private JComboBox comboProv;
@@ -216,7 +217,7 @@ public class QueryFrame extends JFrame {
 		
 		setVisible(true);
 		
-		QueryFrameController qFrameController = new QueryFrameController(this);
+		qFrameController = new QueryFrameController(this);
 	}
 	
 	public void addActListener(ActionListener listener) {
@@ -238,6 +239,10 @@ public class QueryFrame extends JFrame {
 	
 	public JScrollPane getScrollPane() {
 		return scrollPane;
+	}
+
+	public QueryFrameController getqFrameController() {
+		return qFrameController;
 	}
 
 	public void setScrollPane(JScrollPane scrollPane) {
