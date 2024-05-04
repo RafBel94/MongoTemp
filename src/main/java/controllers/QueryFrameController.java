@@ -49,10 +49,10 @@ public class QueryFrameController {
 
 	public void setInitialJTable() {
 		model = new DefaultTableModel() {
-		    @Override
-		    public boolean isCellEditable(int row, int column) {
-		        return false;
-		    }
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
 		};
 		model.addColumn("Provincias");
 		model.addColumn("Año");
@@ -80,11 +80,9 @@ public class QueryFrameController {
 			qFrame.getComboProv().addItem(provincesList.get(i).getToolTipText());
 		}
 
-		
 		// Ages JComboBox Set
 		loadYears();
 		updateYearsCombo();
-		
 
 		// Months JComboBox Set
 		String[] months = { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
@@ -93,7 +91,7 @@ public class QueryFrameController {
 			qFrame.getComboMeses().addItem(m);
 		}
 	}
-	
+
 	public void updateYearsCombo() {
 		qFrame.getComboAnio().removeAllItems();
 		for (String year : yearList) {
@@ -104,18 +102,18 @@ public class QueryFrameController {
 	private void loadYears() {
 		MongoDatabase db = MongoDBConnection.getInstance().getDatabase();
 		MongoCollection<Document> collection = db.getCollection("temperatures");
-		
+
 		MongoCursor<Document> list = collection.find().iterator();
-		while(list.hasNext()) {
+		while (list.hasNext()) {
 			Document doc = list.next();
 			String year = String.valueOf(doc.get("anio"));
-			
-			if(!yearList.contains(year)) {
+
+			if (!yearList.contains(year)) {
 				yearList.add(year);
 			}
 		}
 	}
-	
+
 	public List<String> getYearList() {
 		return yearList;
 	}
@@ -135,11 +133,10 @@ public class QueryFrameController {
 	public void setTable(JTable table) {
 		this.table = table;
 	}
-	
+
 	public QueryFrame getqFrame() {
 		return qFrame;
 	}
-
 
 	//////////////////
 	// PRIVATE CLASSES
@@ -177,33 +174,46 @@ public class QueryFrameController {
 				} else if (checkTempBoxValues() == 3) {
 					bothTempFilterQuery(collection, province, year, month);
 					contConsultas++;
+
 				}
 			} else if (obj == qFrame.getBtnAyuda()) {
 				new QueryHelpFrame();
+
 			} else if (obj == qFrame.getBtnEditar()) {
 				int selectedRow = table.getSelectedRow();
-				if(selectedRow != -1 && contConsultas != 0) {
+
+				if (selectedRow != -1 && contConsultas != 0) {
 					qFrame.setEnabled(false);
 					new EditFrame(QueryFrameController.this);
-				}else if(selectedRow == -1)
-					JOptionPane.showMessageDialog(qFrame, "Debe seleccionar una fila valida para poder editar","Error",JOptionPane.ERROR_MESSAGE);
-				else if(contConsultas == 0)
-					JOptionPane.showMessageDialog(qFrame, "Debe realizar primero una consulta","Error",JOptionPane.ERROR_MESSAGE);
-			} else if(obj == qFrame.getBtnEliminar()) {
-				if(contConsultas != 0 ) {
+				} else if (selectedRow == -1)
+					JOptionPane.showMessageDialog(qFrame, "Debe seleccionar una fila valida para poder editar", "Error",
+							JOptionPane.ERROR_MESSAGE);
+				else if (contConsultas == 0)
+					JOptionPane.showMessageDialog(qFrame, "Debe realizar primero una consulta", "Error",
+							JOptionPane.ERROR_MESSAGE);
+
+			} else if (obj == qFrame.getBtnEliminar()) {
+				if (contConsultas != 0) {
 					int selectedRow = table.getSelectedRow();
-					if(selectedRow != -1) {
-						int election = JOptionPane.showConfirmDialog(qFrame, "¿Seguro que quiere eliminar el registro seleccionado?","Confirmacion",JOptionPane.INFORMATION_MESSAGE);
-						if(election == JOptionPane.OK_OPTION) {
+					if (selectedRow != -1) {
+						int election = JOptionPane.showConfirmDialog(qFrame,
+								"¿Seguro que quiere eliminar el registro seleccionado?", "Confirmacion",
+								JOptionPane.INFORMATION_MESSAGE);
+						if (election == JOptionPane.OK_OPTION) {
 							deleteTemp(selectedRow);
+
 						}
-					}else {
-						JOptionPane.showMessageDialog(qFrame, "Debe seleccionar una fila valida para poder eliminarla","Error",JOptionPane.ERROR_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(qFrame, "Debe seleccionar una fila valida para poder eliminarla",
+								"Error", JOptionPane.ERROR_MESSAGE);
+
 					}
-				}else {
-					JOptionPane.showMessageDialog(qFrame, "Debe realizar primero una consulta","Error",JOptionPane.ERROR_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(qFrame, "Debe realizar primero una consulta", "Error",
+							JOptionPane.ERROR_MESSAGE);
+
 				}
-			}else if(obj == qFrame.getBtnInsertar()) {
+			} else if (obj == qFrame.getBtnInsertar()) {
 				qFrame.setEnabled(false);
 				new InsertFrame(qFrame);
 			}
@@ -213,24 +223,28 @@ public class QueryFrameController {
 			MongoDBConnection conn = MongoDBConnection.getInstance();
 			MongoDatabase db = conn.getDatabase();
 			MongoCollection<Document> collection = db.getCollection("temperatures");
-			
+
 			String province = String.valueOf(table.getValueAt(selectedRow, 0));
 			int year = Integer.parseInt(String.valueOf(table.getValueAt(selectedRow, 1)));
 			String month = String.valueOf(table.getValueAt(selectedRow, 2));
 			int day = Integer.parseInt(String.valueOf(table.getValueAt(selectedRow, 3)));
-			
-			Document filter = new Document("provincia",province).append("anio", year).append("mes", month).append("dia", day);
+
+			Document filter = new Document("provincia", province).append("anio", year).append("mes", month)
+					.append("dia", day);
 			Document deleted = collection.findOneAndDelete(filter);
-			
-			if(deleted != null) {
-				JOptionPane.showMessageDialog(qFrame, "El registro se ha eliminado con exito, vuelva a realizar la consulta para ver los cambios","Eliminacion correcta",JOptionPane.INFORMATION_MESSAGE);
+
+			if (deleted != null) {
+				JOptionPane.showMessageDialog(qFrame,
+						"El registro se ha eliminado con exito, vuelva a realizar la consulta para ver los cambios",
+						"Eliminacion correcta", JOptionPane.INFORMATION_MESSAGE);
 				yearList.remove(String.valueOf(year));
 				updateYearsCombo();
-			}else
-				JOptionPane.showMessageDialog(qFrame, "Documento no encontrado","Error",JOptionPane.ERROR_MESSAGE);
+			} else
+				JOptionPane.showMessageDialog(qFrame, "Documento no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 
-		private void bothTempFilterQuery(MongoCollection<Document> collection, String province, int year, String month) {
+		private void bothTempFilterQuery(MongoCollection<Document> collection, String province, int year,
+				String month) {
 			Document maxTempFilter = new Document("$lte", Integer.parseInt(qFrame.getTextMax().getText()));
 			Document minTempFilter = new Document("$gte", Integer.parseInt(qFrame.getTextMin().getText()));
 			Document filter = new Document("provincia", province).append("anio", year).append("mes", month)

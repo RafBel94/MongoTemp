@@ -24,9 +24,6 @@ public class AdminFrame extends JFrame {
 	private JButton btnAdministrar;
 	private JSeparator separator;
 
-	/**
-	 * Create the frame.
-	 */
 	public AdminFrame() {
 		setTitle("Panel de administrador");
 		setResizable(false);
@@ -58,7 +55,7 @@ public class AdminFrame extends JFrame {
 		getContentPane().add(btnAdministrar);
 
 		setVisible(true);
-		
+
 		adController = new AdminFrameController(this);
 	}
 
